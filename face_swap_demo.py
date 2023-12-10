@@ -221,7 +221,7 @@ if __name__ == "__main__":
     face_parser = load_face_parser(opt.cpu)
     print("face_parser is loaded!")
 
-    fa = face_alignment.FaceAlignment(face_alignment.LandmarksType._2D, face_detector='sfd', 
+    fa = face_alignment.FaceAlignment(face_alignment.LandmarksType.TWO_D, face_detector='sfd', 
                                       device='cpu' if opt.cpu else 'cuda')
     faceswap(opt, fa, generator, kp_detector, tdmm)
             
