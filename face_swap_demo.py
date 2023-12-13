@@ -188,7 +188,7 @@ def faceswap(opt, fa, generator, kp_detector, tdmm):
 
             if opt.use_detection:
                 # fit to the original video
-                bbox_w, bbox_h = driving_bbox[2]-driving_bbox[0], driving_bbox[3]-driving_bbox[1]
+                bbox_w, bbox_h = int(driving_bbox[2]-driving_bbox[0]), int(driving_bbox[3]-driving_bbox[1])
                 prediction = F.interpolate(out['prediction'], size=(bbox_h, bbox_w), mode='bilinear', align_corners=True)
                 driving_image[driving_bbox[1]:driving_bbox[3], driving_bbox[0]:driving_bbox[2], :] = np.transpose(prediction.data.cpu().numpy(), [0, 2, 3, 1])[0] * 255.0
                 predictions.append(driving_image)
