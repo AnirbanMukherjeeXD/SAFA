@@ -66,7 +66,7 @@ def partial_state_dict_load(module, state_dict):
 def load_checkpoints(blend_scale, config_path, checkpoint_path, cpu=False):
 
     with open(config_path) as f:
-        config = yaml.load(f)
+        config = yaml.full_load(f)
 
     # init generator
     generator = OcclusionAwareGenerator(blend_scale=blend_scale,
@@ -148,6 +148,7 @@ def faceswap(opt, fa, generator, kp_detector, tdmm):
             if opt.use_detection:
                 detection = fa.face_detector.detect_from_image(driving_image)
                 if len(detection) == 0:
+                    continue
                     raise ValueError('No faces detected in source images')
                 driving_bbox = bbox_increase(detection[0][0:4], driving_image.shape[1], driving_image.shape[0])
                 driving_bbox = driving_bbox.astype(np.int32)
